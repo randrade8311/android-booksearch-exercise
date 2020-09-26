@@ -5,13 +5,33 @@ import android.text.TextUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
+@Parcel
 public class Book {
     private String openLibraryId;
     private String author;
     private String title;
+    private String publisher;
+    private int pages;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
 
     public String getOpenLibraryId() {
         return openLibraryId;
@@ -44,6 +64,7 @@ public class Book {
             }
             book.title = jsonObject.has("title_suggest") ? jsonObject.getString("title_suggest") : "";
             book.author = getAuthor(jsonObject);
+            book.pages = jsonObject.getInt("number_of_pages");
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
